@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++11 -Wall
 LDFLAGS = -pthread -static-libstdc++ -static-libgcc -ldl
 
-TARGET = my_program
+TARGET = hello_world
 SOURCES = main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 
