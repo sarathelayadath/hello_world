@@ -1,18 +1,18 @@
-# the compiler: gcc for C program, define as g++ for C++
-  CXX = g++
- 
-  # compiler flags:
-  #  -g     - this flag adds debugging information to the executable file
-  #  -Wall  - this flag is used to turn on most compiler warnings
-  CFLAGS  = -g -Wall
- 
-  # The build target 
-  TARGET = main
- 
-  all: $(TARGET)
- 
-  $(TARGET):
-                $(CXX) $(CFLAGS) -o $(TARGET) $(TARGET).cpp
- 
-  clean:
-                $(RM) $(TARGET)
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall
+LDFLAGS = -pthread -static-libstdc++ -static-libgcc -ldl
+
+TARGET = my_program
+SOURCES = main.cpp
+OBJECTS = $(SOURCES:.cpp=.o)
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(TARGET) $(LDFLAGS)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(TARGET) $(OBJECTS)
